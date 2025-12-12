@@ -2,7 +2,7 @@
   "services": {
     "n8n": {
       "container_name": "n8n",
-      "image": "n8nio/n8n:1.120.4",
+      "image": "n8nio/n8n:2.0.1",
       "restart": "unless-stopped",
       "ports": [
         "${APP_PORT}:5678"
