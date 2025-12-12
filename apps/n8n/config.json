@@ -1,0 +1,25 @@
+{
+  "name": "n8n",
+  "id": "n8n",
+  "available": true,
+  "short_desc": "Workflow automation tool.",
+  "author": "n8n",
+  "port": 5678,
+  "categories": [
+    "productivity",
+    "automation"
+  ],
+  "description": "n8n is an extendable workflow automation tool that enables you to connect anything to everything via its open, fair-code model.",
+  "tipi_version": 2,
+  "version": "latest",
+  "source": "https://n8n.io/",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1700000000000,
+  "updated_at": 1700000000000,
+  "dynamic_config": true,
+  "form_fields": []
+}

@@ -1,0 +1,16 @@
+{
+  "services": [
+    {
+      "name": "n8n",
+      "image": "n8nio/n8n:latest",
+      "isMain": true,
+      "internalPort": "5678",
+      "environment": {
+        "N8N_PORT": "5678"
+      },
+      "volumes": [
+        "${APP_DATA_DIR}/data:/home/node/.n8n"
+      ]
+    }
+  ]
+}

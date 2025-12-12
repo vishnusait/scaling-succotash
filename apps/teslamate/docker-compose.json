@@ -1,0 +1,65 @@
+{
+  "services": [
+    {
+      "name": "teslamate",
+      "image": "teslamate/teslamate:latest",
+      "restart": "always",
+      "isMain": true,
+      "internalPort": "4000",
+      "environment": {
+        "ENCRYPTION_KEY": "${ENCRYPTION_KEY}",
+        "DATABASE_USER": "teslamate",
+        "DATABASE_PASS": "${DATABASE_PASS}",
+        "DATABASE_NAME": "teslamate",
+        "DATABASE_HOST": "database",
+        "MQTT_HOST": "mosquitto"
+      },
+      "volumes": [
+        "${APP_DATA_DIR}/import:/opt/app/import"
+      ],
+      "depends_on": [
+        "database",
+        "mosquitto"
+      ]
+    },
+    {
+      "name": "database",
+      "image": "postgres:15",
+      "restart": "always",
+      "environment": {
+        "POSTGRES_USER": "teslamate",
+        "POSTGRES_PASSWORD": "${DATABASE_PASS}",
+        "POSTGRES_DB": "teslamate"
+      },
+      "volumes": [
+        "${APP_DATA_DIR}/db:/var/lib/postgresql/data"
+      ]
+    },
+    {
+      "name": "grafana",
+      "image": "teslamate/grafana:latest",
+      "restart": "always",
+      "environment": {
+        "DATABASE_USER": "teslamate",
+        "DATABASE_PASS": "${DATABASE_PASS}",
+        "DATABASE_NAME": "teslamate",
+        "DATABASE_HOST": "database"
+      },
+      "volumes": [
+        "${APP_DATA_DIR}/grafana:/var/lib/grafana"
+      ],
+      "depends_on": [
+        "database"
+      ]
+    },
+    {
+      "name": "mosquitto",
+      "image": "eclipse-mosquitto:2",
+      "restart": "always",
+      "volumes": [
+        "${APP_DATA_DIR}/mosquitto/conf:/mosquitto/config",
+        "${APP_DATA_DIR}/mosquitto/data:/mosquitto/data"
+      ]
+    }
+  ]
+}
